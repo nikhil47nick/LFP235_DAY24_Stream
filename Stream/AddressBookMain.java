@@ -115,28 +115,17 @@ public class AddressBookMain {
 
     }
 
-    void viewPersons(){
+
+
+    void search_CityState_With_Person(String city1,String state1){
         Map<String,List<String>> nameByCity =
                 contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
-        nameByCity.forEach((city, names) -> System.out.println(city+ " has " +"persons "+ names));
+        System.out.println(nameByCity.get(city1));
+
         Map<String,List<String>> nameByState =
                 contact.stream().collect(Collectors.groupingBy(Address::getState, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
-        nameByState.forEach((state, names) -> System.out.println(state+ " has " +" persons "+ names));
-        city.putAll(nameByCity);
-        state.putAll(nameByState);
+        System.out.println(nameByState.get(state1));
     }
-
-    void searchByCityOrStateWithNumberOfPerson(){
-
-
-        Map<String,Long> countCity = contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new, Collectors.counting()));
-        countCity.forEach((city, count) -> System.out.println(city+ " has " +"Number of persons "+ count));
-        Map<String,Long> countState = contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new, Collectors.counting()));
-        countState.forEach((state, count) -> System.out.println(state+ " has " +"Number of persons "+ count));
-
-
-    }
-
     void dictionaryOfCityAndState(){
 
     }
@@ -144,8 +133,7 @@ public class AddressBookMain {
         AddressBookMain entry = new AddressBookMain();
         Scanner scr = new Scanner(System.in);
         entry.addEntry(scr);
-        entry.searchByCityOrStateWithNumberOfPerson();
-        entry.viewPersons();
+       
         scr.close();
 
 
