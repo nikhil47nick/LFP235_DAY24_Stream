@@ -153,17 +153,29 @@ public class AddressBookMain {
 
        Collections.sort(entry.contact,new SortByName());
         entry.toString();
-
+        entry.sortByCity();
         scr.close();
 
     }
 
     @Override
     public String toString(){
-        
+
         contact.forEach(Address::show);
         return null;
     }
 
+    public void sortByCity(){
+        Collections.sort(contact,(o1, o2) -> CharSequence.compare(o1.getCity(),o2.getCity()));
+        toString();
+    }
 
+    public void sortByZip(){
+        Collections.sort(contact,(o1, o2) -> CharSequence.compare(o1.getZip(),o2.getZip()));
+        toString();
+    }
+    public void sortByState(){
+        Collections.sort(contact,(o1, o2) -> CharSequence.compare(o1.getState(),o2.getState()));
+        toString();
+    }
 }
