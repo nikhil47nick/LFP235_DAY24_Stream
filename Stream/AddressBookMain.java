@@ -121,10 +121,12 @@ public class AddressBookMain {
         Map<String,List<String>> nameByCity =
                 contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
         System.out.println(nameByCity.get(city1));
+        nameByCity.forEach((city,name)-> System.out.println(city + " has : "+ name));
 
         Map<String,List<String>> nameByState =
                 contact.stream().collect(Collectors.groupingBy(Address::getState, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
         System.out.println(nameByState.get(state1));
+        nameByState.forEach((state,name)-> System.out.println(state + " has : "+ name));
     }
     void dictionaryOfCityAndState(){
 
