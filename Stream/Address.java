@@ -1,6 +1,8 @@
 package Com.BridgeLabz.Stream;
 
 
+import java.util.function.Predicate;
+
 public class Address {
     private String firstname;
     private String lastName;

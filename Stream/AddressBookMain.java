@@ -1,6 +1,9 @@
 package Com.BridgeLabz.Stream;
 
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -117,7 +120,9 @@ public class AddressBookMain {
 
 
 
-    void search_CityState_With_Person(String city1,String state1){
+    void streamFunction(String city1,String state1){
+        //show persons in city/state according to city/state
+        //show all city/state and persons in it
         Map<String,List<String>> nameByCity =
                 contact.stream().collect(Collectors.groupingBy(Address::getCity, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
         System.out.println(nameByCity.get(city1));
@@ -127,26 +132,38 @@ public class AddressBookMain {
                 contact.stream().collect(Collectors.groupingBy(Address::getState, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
         System.out.println(nameByState.get(state1));
         nameByState.forEach((state,name)-> System.out.println(state + " has : "+ name));
-
+        //show city and state by number of persons
         contact.stream().collect(Collectors.groupingBy(Address::getCity,TreeMap::new,Collectors.counting()))
                 .forEach((city,count)-> System.out.println(city + " has number of persons: "+ count));
         contact.stream().collect(Collectors.groupingBy(Address::getState,TreeMap::new,Collectors.counting()))
                 .forEach((state,count)-> System.out.println(state + " has number of persons: "+ count));
-    }
-    void dictionaryOfCityAndState(){
+
 
     }
+
     public static void main(String[] args) {
         AddressBookMain entry = new AddressBookMain();
         Scanner scr = new Scanner(System.in);
-        entry.addEntry(scr);
-       entry.search_CityState_With_Person("JP","RJ");
+        entry.contact.add(new Address("ABC","ABC","abcd","JP","RJ","32013","9828492347","nikhil@fgna.com"));
+        entry.contact.add(new Address("CBC","CBC","CBCabcd","JD","RJ","32013","9828492347","nikhil@fgna.com"));
+        entry.contact.add(new Address("DCB","DCB","aDCBbcd","AJ","RJ","32013","9828492347","nikhil@fgna.com"));
+        entry.contact.add(new Address("EEE","EEE","abcEEEd","MB","MP","32013","9828492347","nikhil@fgna.com"));
+        entry.contact.add(new Address("AEE","EEE","abcEEEd","MB","MP","32013","9828492347","nikhil@fgna.com"));
+       entry.streamFunction("JP","RJ");
+
+       Collections.sort(entry.contact,new SortByName());
+        entry.toString();
+
         scr.close();
 
-
-
-
-
     }
+
+    @Override
+    public String toString(){
+        
+        contact.forEach(Address::show);
+        return null;
+    }
+
 
 }
