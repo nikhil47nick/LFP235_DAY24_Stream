@@ -127,6 +127,11 @@ public class AddressBookMain {
                 contact.stream().collect(Collectors.groupingBy(Address::getState, TreeMap::new,Collectors.mapping(Address::getName,Collectors.toList())));
         System.out.println(nameByState.get(state1));
         nameByState.forEach((state,name)-> System.out.println(state + " has : "+ name));
+
+        contact.stream().collect(Collectors.groupingBy(Address::getCity,TreeMap::new,Collectors.counting()))
+                .forEach((city,count)-> System.out.println(city + " has number of persons: "+ count));
+        contact.stream().collect(Collectors.groupingBy(Address::getState,TreeMap::new,Collectors.counting()))
+                .forEach((state,count)-> System.out.println(state + " has number of persons: "+ count));
     }
     void dictionaryOfCityAndState(){
 
