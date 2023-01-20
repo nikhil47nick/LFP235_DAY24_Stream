@@ -135,7 +135,7 @@ public class AddressBookMain {
         AddressBookMain entry = new AddressBookMain();
         Scanner scr = new Scanner(System.in);
         entry.addEntry(scr);
-       
+       entry.search_CityState_With_Person("JP","RJ");
         scr.close();
 
 
